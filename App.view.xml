@@ -1,0 +1,84 @@
+<mvc:View
+	controllerName="fiori.template.controller.App"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+
+<Text text="pele a as" />
+
+<Button	text="Me clica" press="onClique" />
+
+<Panel headerText="empty string" >
+
+	<content>
+		<Label text="Nome" class="sapUiSmallMargin" />
+		<Input value="{pessoa>/nome}" valueLiveUpdate="true" width="200px" enabled="{pessoa>/habilitado}"/>
+		<Label text="Sobrenome" class="sapUiSmallMargin"  />
+		<Input value="{pessoa>/sobrenome}" valueLiveUpdate="false" width="200px" enabled="{pessoa>/habilitado}"/>
+		<CheckBox selected="{pessoa>/habilitado}" text="Habilitado" />
+	</content>
+</Panel>
+
+<Panel visible="false" headerText="Detalhes Endereço" class="sapUiSmallMargin" width="auto" >
+	<content>
+		<l:VerticalLayout>
+			<Label text="Endereço" class="sapUiSmallMargin" />
+			<Text class="sapUiSmallMargin" text="{pessoa>/endereco/rua}" />
+			<Text class="sapUiSmallMargin" text="{pessoa>/endereco/cidade}" />
+			<Text class="sapUiSmallMargin" text="{pessoa>/endereco/cep}" />
+			<Text class="sapUiSmallMargin" text="{pessoa>/endereco/pais}" />
+		</l:VerticalLayout>
+	</content>
+</Panel>
+
+<List backgroundDesign="Solid" headerText="Lista de Funcionarios" 
+	  growing="true" 
+	  growingThreshold="4"
+	  class="sapUiResponsiveMargin"
+	  width="auto" 
+	  items="{empregados>/Funcionarios}" >
+
+	  <items>
+
+		<StandardListItem
+			title="{empregados>nome} {empregados>sobrenome}"
+			info="{= ${empregados>habilitado} === true ? 'Habilitado' : 'Inativo' }" 
+			type="Active"
+			press="onFuncionarioSelected"
+		/>
+
+	  </items>
+	
+</List>
+
+<Panel id="detalhePanel" headerText="Detalhes Funcionario" class="sapUiSmallMargin" width="auto" >
+	<content>
+			<Text class="sapUiSmallMargin" text="Nome: {empregados>nome}" />
+			<Text class="sapUiSmallMargin" text="Sobrenome: {empregados>sobrenome}" />
+			<Text class="sapUiSmallMargin" text="Habilitado: {empregados>habilitado}" />
+	</content>
+</Panel>
+
+<List headerText="Lista de Vendas" 
+	  growing="true" 
+	  growingThreshold="4"
+	  class="sapUiResponsiveMargin"
+	  width="auto" 
+	  items="{/ClienteSet}" >
+
+	  <items>
+
+		<StandardListItem
+			type="Active"
+			title="{ClienteID} {Nome}"
+		/>
+
+	  </items>
+
+</List>
+
+</mvc:View>
