@@ -1,0 +1,83 @@
+{ 
+    "_version": "1.12.0",
+    "sap.app": {
+        "id": "fiori.template",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title": "Titulo aplicação",
+        "description": "Descrição da aplicação",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "dataSources": {
+            "lojaRemote":{
+                "uri" : "http://lnl-s4h.opustech.com.br:8000/sap/opu/odata/sap/ZMONITORVENDASDCR_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology" : "UI5",
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName" : "fiori.template.view.App",
+            "type" : "XML",
+            "async" : true,
+            "id" : "app"
+        },
+        "dependencies" : {
+            "minUI5Version": "1.60",
+            "libs": {
+                "sap.m": {}
+            }
+        },
+        "models": {
+            "" :{
+                "dataSource": "lojaRemote",
+                "settings": {
+                    "tokenHandling": false
+                }
+            }
+        },
+
+        "routing": {
+            "config":{
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "fiori.template.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "transition": "slide"
+            },
+            
+            "routes": [
+                {
+                "pattern" : "",
+                "name" : "appHome",
+                "target" : "home"
+                }
+            ],
+
+            "targets": {
+                "home" : {
+                    "viewId": "home",
+                    "viewName": "Worklist",
+                    "viewLevel": 1
+                }
+            }
+
+            
+        }
+
+        
+    }
+}
